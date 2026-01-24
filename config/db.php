@@ -5,7 +5,7 @@
         $password = "";
         try{
             $con = new PDO($server, $user, $password);
-            echo "Database Connected Successfully";
+            // echo "Database Connected Successfully";
             return $con;
         }catch(PDOException $e){
             die("Database Connection Failed : " .$e->getMessage());
