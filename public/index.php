@@ -30,7 +30,7 @@ $courses = $stmt->fetchAll();
             <td><?php echo htmlspecialchars($course['title']); ?></td>
             <td><?php echo htmlspecialchars($course['category']); ?></td>
             <td><?php echo htmlspecialchars($course['level']); ?></td>
-            <td><?php echo htmlspecialchars($course['instructor']); ?></td>
+            <td><?php echo htmlspecialchars($course['instructor_id']); ?></td>
             <td>
                 <a href="edit.php?id=<?php echo $course['id']; ?>">Edit</a> |
                 <a href="delete.php?id=<?php echo $course['id']; ?>">Delete</a>
