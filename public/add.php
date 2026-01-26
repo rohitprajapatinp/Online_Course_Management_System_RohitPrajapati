@@ -4,8 +4,8 @@ require "../includes/header.php";
 
 $con = dbConnect();
 
-// Fetch all instructors for the dropdown
-$instructors = $con->query("SELECT * FROM instructors")->fetchAll();
+// Fetch instructors for dropdown
+$instructors = $con->query("SELECT * FROM instructors")->fetchAll(PDO::FETCH_ASSOC);
 
 if (isset($_POST['submit'])) {
 
@@ -13,19 +13,9 @@ if (isset($_POST['submit'])) {
     $category = trim($_POST['category']);
     $level = trim($_POST['level']);
 
-    // If instructor_id is empty or invalid, set it to NULL
-    $instructor_id = null;
-    if (!empty($_POST['instructor_id'])) {
-        // Check if this instructor_id exists in the instructors table
-        $stmt_check = $con->prepare("SELECT id FROM instructors WHERE id = ?");
-        $stmt_check->execute([$_POST['instructor_id']]);
-        $valid_instructor = $stmt_check->fetch();
-        if ($valid_instructor) {
-            $instructor_id = (int) $_POST['instructor_id'];
-        }
-    }
+    // Allow NULL instructor
+    $instructor_id = !empty($_POST['instructor_id']) ? $_POST['instructor_id'] : null;
 
-    // Insert course
     $sql = "INSERT INTO courses (title, category, level, instructor_id)
             VALUES (?, ?, ?, ?)";
     $stmt = $con->prepare($sql);
@@ -56,9 +46,9 @@ if (isset($_POST['submit'])) {
     <label>Instructor:</label><br>
     <select name="instructor_id">
         <option value="">-- Select Instructor --</option>
-        <?php foreach($instructors as $instructor): ?>
-            <option value="<?php echo $instructor['id']; ?>">
-                <?php echo htmlspecialchars($instructor['name']); ?>
+        <?php foreach ($instructors as $instructor): ?>
+            <option value="<?= $instructor['id']; ?>">
+                <?= htmlspecialchars($instructor['name']); ?>
             </option>
         <?php endforeach; ?>
     </select><br><br>

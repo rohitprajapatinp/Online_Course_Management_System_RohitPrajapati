@@ -4,9 +4,15 @@ require "../includes/header.php";
 
 $con = dbConnect();
 
-$stmt = $con->prepare("SELECT * FROM courses");
+$sql = "
+    SELECT courses.*, instructors.name AS instructor_name
+    FROM courses
+    LEFT JOIN instructors ON courses.instructor_id = instructors.id
+";
+
+$stmt = $con->prepare($sql);
 $stmt->execute();
-$courses = $stmt->fetchAll();
+$courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <h2>Course List</h2>
@@ -26,14 +32,17 @@ $courses = $stmt->fetchAll();
 
     <?php foreach ($courses as $course): ?>
         <tr>
-            <td><?php echo $course['id']; ?></td>
-            <td><?php echo htmlspecialchars($course['title']); ?></td>
-            <td><?php echo htmlspecialchars($course['category']); ?></td>
-            <td><?php echo htmlspecialchars($course['level']); ?></td>
-            <td><?php echo htmlspecialchars($course['instructor_id']); ?></td>
+            <td><?= $course['id']; ?></td>
+            <td><?= htmlspecialchars($course['title']); ?></td>
+            <td><?= htmlspecialchars($course['category']); ?></td>
+            <td><?= htmlspecialchars($course['level']); ?></td>
+            <td><?= htmlspecialchars($course['instructor_name'] ?? '—'); ?></td>
             <td>
-                <a href="edit.php?id=<?php echo $course['id']; ?>">Edit</a> |
-                <a href="delete.php?id=<?php echo $course['id']; ?>">Delete</a>
+                <a href="edit.php?id=<?= $course['id']; ?>">Edit</a> |
+                <a href="delete.php?id=<?= $course['id']; ?>"
+                   onclick="return confirm('Are you sure you want to delete this course?');">
+                   Delete
+                </a>
             </td>
         </tr>
     <?php endforeach; ?>

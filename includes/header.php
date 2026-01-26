@@ -8,13 +8,5 @@
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="../public/index.php">Home</a></li>
-                <li><a href="../public/add.php">Add Course</a></li>
-                <li><a href="../public/edit.php">Edit Course</a></li>
-                <li><a href="../public/delete.php">Delete Course</a></li>
-                <li><a href="../public/search.php">Search Courses</a></li>
-            </ul>
-        </nav>
+        <h1>Online Course Management System</h1>
     </header>
