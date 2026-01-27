@@ -9,43 +9,54 @@ $sql = "
     FROM courses
     LEFT JOIN instructors ON courses.instructor_id = instructors.id
 ";
-
 $stmt = $con->prepare($sql);
 $stmt->execute();
 $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<h2>Course List</h2>
+<div class="container">
 
-<a href="add.php">Add New Course</a>
-<br><br>
+    <h2>Course List</h2>
 
-<table border="1" cellpadding="8">
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Category</th>
-        <th>Level</th>
-        <th>Instructor</th>
-        <th>Action</th>
-    </tr>
+    <a href="add.php" class="btn">+ Add New Course</a>
 
-    <?php foreach ($courses as $course): ?>
-        <tr>
-            <td><?= $course['id']; ?></td>
-            <td><?= htmlspecialchars($course['title']); ?></td>
-            <td><?= htmlspecialchars($course['category']); ?></td>
-            <td><?= htmlspecialchars($course['level']); ?></td>
-            <td><?= htmlspecialchars($course['instructor_name'] ?? '—'); ?></td>
-            <td>
-                <a href="edit.php?id=<?= $course['id']; ?>">Edit</a> |
-                <a href="delete.php?id=<?= $course['id']; ?>"
-                   onclick="return confirm('Are you sure you want to delete this course?');">
-                   Delete
-                </a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Level</th>
+                <th>Instructor</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if (count($courses) > 0): ?>
+            <?php foreach ($courses as $course): ?>
+                <tr>
+                    <td><?= $course['id']; ?></td>
+                    <td><?= htmlspecialchars($course['title']); ?></td>
+                    <td><?= htmlspecialchars($course['category']); ?></td>
+                    <td><?= htmlspecialchars(!empty($course['level']) ? $course['level'] : '—'); ?></td>
+                    <td><?= htmlspecialchars(!empty($course['instructor_name']) ? $course['instructor_name'] : '—'); ?></td>
+                    <td>
+                        <a href="edit.php?id=<?= $course['id']; ?>" class="btn edit">Edit</a>
+                        <a href="delete.php?id=<?= $course['id']; ?>" class="btn delete"
+                           onclick="return confirm('Are you sure you want to delete this course?');">
+                           Delete
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="6" style="text-align:center;">No courses found</td>
+            </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+
+</div>
 
 <?php require "../includes/footer.php"; ?>

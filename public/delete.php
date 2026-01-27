@@ -9,7 +9,8 @@ if (!isset($_GET['id'])) {
 $con = dbConnect();
 $id = (int) $_GET['id'];
 
-$stmt = $con->prepare("DELETE FROM courses WHERE id = ?");
+$sql = "DELETE FROM courses WHERE id = ?";
+$stmt = $con->prepare($sql);
 $stmt->execute([$id]);
 
 header("Location: index.php");

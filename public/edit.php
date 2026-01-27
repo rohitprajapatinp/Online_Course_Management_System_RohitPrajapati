@@ -11,7 +11,6 @@ if (!isset($_GET['id'])) {
 
 $id = (int) $_GET['id'];
 
-// Fetch course
 $stmt = $con->prepare("SELECT * FROM courses WHERE id = ?");
 $stmt->execute([$id]);
 $course = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -20,10 +19,10 @@ if (!$course) {
     die("Course not found");
 }
 
-// Fetch instructors
-$instructors = $con->query("SELECT * FROM instructors")->fetchAll();
+$instructors = $con->query("SELECT * FROM instructors")->fetchAll(PDO::FETCH_ASSOC);
 
 if (isset($_POST['submit'])) {
+
     $title = trim($_POST['title']);
     $category = trim($_POST['category']);
     $level = trim($_POST['level']);
@@ -40,37 +39,46 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<h2>Edit Course</h2>
+<div class="container">
 
-<form method="POST">
-    <label>Title:</label><br>
-    <input type="text" name="title" value="<?= htmlspecialchars($course['title']); ?>" required><br><br>
+    <h2>Edit Course</h2>
 
-    <label>Category:</label><br>
-    <input type="text" name="category" value="<?= htmlspecialchars($course['category']); ?>"><br><br>
+    <form method="POST">
 
-    <label>Level:</label><br>
-    <select name="level">
-        <option value="">-- Select Level --</option>
-        <?php foreach (["Beginner","Intermediate","Advanced"] as $lvl): ?>
-            <option value="<?= $lvl; ?>" <?= $course['level'] === $lvl ? 'selected' : ''; ?>>
-                <?= $lvl; ?>
-            </option>
-        <?php endforeach; ?>
-    </select><br><br>
+        <label>Title</label>
+        <input type="text" name="title"
+               value="<?= htmlspecialchars($course['title']); ?>" required>
 
-    <label>Instructor:</label><br>
-    <select name="instructor_id">
-        <option value="">-- Select Instructor --</option>
-        <?php foreach ($instructors as $instructor): ?>
-            <option value="<?= $instructor['id']; ?>"
-                <?= $course['instructor_id'] == $instructor['id'] ? 'selected' : ''; ?>>
-                <?= htmlspecialchars($instructor['name']); ?>
-            </option>
-        <?php endforeach; ?>
-    </select><br><br>
+        <label>Category</label>
+        <input type="text" name="category"
+               value="<?= htmlspecialchars($course['category']); ?>">
 
-    <input type="submit" name="submit" value="Update Course">
-</form>
+        <label>Level</label>
+        <select name="level">
+            <option value="">-- Select Level --</option>
+            <?php foreach (["Beginner","Intermediate","Advanced"] as $lvl): ?>
+                <option value="<?= $lvl; ?>"
+                    <?= $course['level'] === $lvl ? 'selected' : ''; ?>>
+                    <?= $lvl; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <label>Instructor</label>
+        <select name="instructor_id">
+            <option value="">-- Select Instructor --</option>
+            <?php foreach ($instructors as $instructor): ?>
+                <option value="<?= $instructor['id']; ?>"
+                    <?= $course['instructor_id'] == $instructor['id'] ? 'selected' : ''; ?>>
+                    <?= htmlspecialchars($instructor['name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <input type="submit" name="submit" value="Update Course" class="btn">
+
+    </form>
+
+</div>
 
 <?php require "../includes/footer.php"; ?>
