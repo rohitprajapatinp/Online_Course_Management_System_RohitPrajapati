@@ -58,6 +58,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </form>
 
 <br>
-<!-- <a href="view_enrollments.php">View Enrollments</a> -->
 
 <?php include "../includes/footer.php"; ?>
