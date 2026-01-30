@@ -86,9 +86,9 @@ online_course_system/
 
 - Role-based access control is not implemented (optional feature).
 - To add new instructors, you must currently use MySQL directly (via phpMyAdmin or terminal).
-- Student enrollment functionality is implemented, but editing or deleting enrolled students is not available due to time constraints.
+- Student enrollment functionality is implemented, but editing enrolled students is not available due to time constraints.
 - Some error handling is still basic and may need improvement.
-- There is only one login account for the system at the moment; multi-user functionality is not implemented yet.
+- There is only one login credential for the system at the moment; multi-user functionality is not implemented yet.
 
 --------------------------------------------------
 

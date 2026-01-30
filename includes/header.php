@@ -22,8 +22,11 @@ if (!isLoggedIn() && $currentPage !== "login.php") {
 <nav>
     <a href="index.php">Home</a> |
     <a href="add_course.php">Add Course</a> |
+    <a href="enroll_student.php">Enroll Student</a> |
+    <a href="view_enrollments.php">View Enrollments</a> |
     <a href="search.php">Search</a> |
     <a href="logout.php">Logout</a>
 </nav>
+
 
 <hr>

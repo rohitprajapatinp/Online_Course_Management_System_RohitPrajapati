@@ -10,13 +10,13 @@ if (!verifyCSRFToken($_POST['csrf_token'])) {
 }
 
 if (!isset($_POST['id'])) {
-    die("Course ID missing");
+    die("Enrollment ID missing");
 }
 
 $id = $_POST['id'];
 
-$stmt = $pdo->prepare("DELETE FROM courses WHERE id = ?");
+$stmt = $pdo->prepare("DELETE FROM enrollments WHERE id = ?");
 $stmt->execute([$id]);
 
-header("Location: index.php");
+header("Location: view_enrollments.php");
 exit;
