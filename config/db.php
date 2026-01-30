@@ -1,14 +1,18 @@
 <?php
-function dbConnect() {
-    $server = "mysql:host=localhost;dbname=online_courses_db;charset=utf8mb4";
-    $user = "root";
-    $password = "";
+$host = "localhost";
+$dbname = "online_courses";
+$username = "root";
+$password = "";
 
-    try {
-        $con = new PDO($server, $user, $password);
-        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $con;
-    } catch (PDOException $e) {
-        die("Database Connection Failed: " . $e->getMessage());
-    }
+try {
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+
+    $pdo = new PDO($dsn, $username, $password);
+
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
+} catch (PDOException $e) {
+    die("Database connection failed. Please try again later.");
 }
