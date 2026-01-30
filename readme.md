@@ -84,14 +84,14 @@ online_course_system/
 
 ## Known Issues
 
-- No role-based access control (optional)
-- No pagination (not required)
-- Inorder to add more instructors, it must be done from the mysql shell using the terminal
-- I have just added the functionality to enroll the students into a course, there is no any edit and delete option due to the time constraint. But, the course does have CRUD functionality.
-- Some error handling part
+- Role-based access control is not implemented (optional feature).
+- To add new instructors, you must currently use MySQL directly (via phpMyAdmin or terminal).
+- Student enrollment functionality is implemented, but editing or deleting enrolled students is not available due to time constraints.
+- Some error handling is still basic and may need improvement.
+- There is only one login account for the system at the moment; multi-user functionality is not implemented yet.
 
 --------------------------------------------------
 
 ## Author
 
-Student Full Stack Development Assessment Rohit Prajapati - 2462266
+Rohit Prajapati – Student Full Stack Development Assessment – ID: 2462266
