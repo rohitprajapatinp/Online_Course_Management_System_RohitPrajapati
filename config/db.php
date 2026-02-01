@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$dbname = "online_courses";
-$username = "root";
-$password = "";
+$dbname = "np03cs4a240166";
+$username = "np03cs4a240166";
+$password = "J4w8W04Lcu";
 
 try {
     $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
