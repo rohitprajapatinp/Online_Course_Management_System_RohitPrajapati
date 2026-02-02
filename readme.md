@@ -5,6 +5,12 @@ as part of the Full Site Implementation assessment.
 
 --------------------------------------------------
 
+## Hosted Server Link
+
+https://student.heraldcollege.edu.np/~np03cs4a240166/public/login.php
+
+--------------------------------------------------
+
 ## Login Credentials
 
 Username: admin  
